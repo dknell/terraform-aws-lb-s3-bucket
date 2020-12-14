@@ -26,7 +26,9 @@ data "aws_iam_policy_document" "default" {
 }
 
 module "s3_bucket" {
-  source                             = "git::https://github.com/cloudposse/terraform-aws-s3-log-storage.git?ref=tags/0.15.1"
+  # use this fork until they support terraform 0.14.x
+  source                             = "git::https://github.com/dknell/terraform-aws-s3-log-storage"
+  # source                             = "git::https://github.com/cloudposse/terraform-aws-s3-log-storage.git?ref=tags/0.15.1"
   context                            = module.this.context
   acl                                = var.acl
   policy                             = join("", data.aws_iam_policy_document.default.*.json)
